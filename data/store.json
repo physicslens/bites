@@ -2,11 +2,33 @@
   "modules": [
     {
       "id": "module-1776597511118-2717",
-      "title": "Untitled Module",
-      "topic": "",
-      "assignedClasses": [],
-      "slides": [],
-      "theme": "default"
+      "title": "Principle of Moments",
+      "topic": "Turning Effect",
+      "assignedClasses": [
+        "3F"
+      ],
+      "slides": [
+        {
+          "id": "34064ddd-ed20-4f60-9f2e-a7b1c65274e0",
+          "type": "text",
+          "html": "The quick brown fox. $\\dfrac{21}{12421}$ "
+        },
+        {
+          "id": "a6b5c073-a29c-497d-8b08-55e62d72fb30",
+          "type": "quiz",
+          "quiz": {
+            "prompt": "",
+            "choices": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "responses": {}
+          }
+        }
+      ],
+      "theme": "minimalist"
     }
   ],
   "students": [

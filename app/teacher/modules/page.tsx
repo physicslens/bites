@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { BlockMath, InlineMath } from "react-katex";
-import { saveModules } from "../../../lib/data";
+
 
 type QuizBlock = {
   prompt: string;
@@ -26,8 +26,7 @@ type Module = {
   slides: Slide[];
   theme?: Theme;
 };
-
-export default function ModuleEditorPage() {
+function ModuleEditorPage() {
   const [modules, setModules] = useState<Module[]>([]);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -43,23 +42,49 @@ export default function ModuleEditorPage() {
   const [youtubeUrl, setYoutubeUrl] = useState("");
   const [activeSlideForModal, setActiveSlideForModal] = useState<any>(null);
 
-  // --- STUBS FOR ALL REFERENCED FUNCTIONS ---
-  function addModule() {
+
+  // Load modules from API on mount
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("/api/modules");
+      if (res.ok) {
+        const loaded = await res.json();
+        setModules(loaded);
+      }
+    })();
+  }, []);
+
+  async function addModule() {
+    // Generate ID only on client, never during SSR
+    const id = typeof window !== "undefined" && window.crypto?.randomUUID
+      ? window.crypto.randomUUID()
+      : Math.random().toString(36).slice(2);
     const newModule: Module = {
-      id: Math.random().toString(36).slice(2),
+      id,
       title: "Untitled Module",
       topic: "",
       assignedClasses: [],
       slides: [],
       theme: "default",
     };
-    setModules((prev) => [...prev, newModule]);
+    const updated = [...modules, newModule];
+    setModules(updated);
+    await fetch("/api/modules", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    });
   }
+
   async function saveChanges() {
     setSaving(true);
     setMessage(null);
     try {
-      await saveModules(modules);
+      await fetch("/api/modules", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(modules),
+      });
       setMessage("Modules saved successfully.");
     } catch (err) {
       setMessage("Failed to save modules.");
@@ -72,14 +97,18 @@ export default function ModuleEditorPage() {
   }
   function removeModule(id: string) {}
   function createSlide(moduleId: string, type: "text" | "quiz") {
+    // Generate ID only on client, never during SSR
+    const id = typeof window !== "undefined" && window.crypto?.randomUUID
+      ? window.crypto.randomUUID()
+      : Math.random().toString(36).slice(2);
     setModules((prev) =>
       prev.map((m) => {
         if (m.id !== moduleId) return m;
         const newSlide =
           type === "text"
-            ? { id: Math.random().toString(36).slice(2), type: "text", html: "" }
+            ? { id, type: "text", html: "" }
             : {
-                id: Math.random().toString(36).slice(2),
+                id,
                 type: "quiz",
                 quiz: { prompt: "", choices: ["", "", "", ""], correct: undefined, responses: {} },
               };
@@ -92,7 +121,36 @@ export default function ModuleEditorPage() {
   function syncTextHtml(moduleId: string, slideId: string) {}
   function updateSlide(moduleId: string, slideId: string, data: any) {}
   function insertImage() {}
-  function renderPreview(slide: Slide, theme: Theme = "default") { return null; }
+  function renderPreview(slide: Slide, theme: Theme = "default") {
+    if (!slide || slide.type !== "text" || !slide.html) return null;
+    // Replace $...$ and $$...$$ with KaTeX components
+    const html = slide.html;
+    // Block math: $$...$$
+    const blockMathRegex = /\$\$(.+?)\$\$/gs;
+    // Inline math: $...$
+    const inlineMathRegex = /\$(.+?)\$/g;
+
+    // Split by block math first
+    const parts = html.split(blockMathRegex);
+    const rendered = parts.map((part, i) => {
+      if (i % 2 === 1) {
+        // Odd indices: block math
+        return <BlockMath key={i}>{part}</BlockMath>;
+      } else {
+        // Even indices: may contain inline math
+        const subparts = part.split(inlineMathRegex);
+        return subparts.map((sub, j) => {
+          if (j % 2 === 1) {
+            return <InlineMath key={j}>{sub}</InlineMath>;
+          } else {
+            return <span key={j} dangerouslySetInnerHTML={{ __html: sub }} />;
+          }
+        });
+      }
+    });
+    return <div className="prose max-w-none">{rendered}</div>;
+  }
+
   return (
     <main className="container">
       <div className="card space-y-6">
@@ -203,29 +261,30 @@ export default function ModuleEditorPage() {
                         </p>
                       </div>
                       <div className="space-y-3">
-                        <textarea
-                          className="min-h-[80px] w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 focus:outline-none"
-                          value={(() => {
-                            const slide = module.slides[selectedSlideIdx[module.id] ?? 0];
-                            if (!slide) return "";
-                            if (slide.type === "text") return slide.html || "";
-                            return "[Quiz slide]";
-                          })()}
-                          onChange={(e) => {
-                            const idx = selectedSlideIdx[module.id] ?? 0;
-                            const slide = module.slides[idx];
-                            if (!slide || slide.type !== "text") return;
-                            const updatedSlide = { ...slide, html: e.target.value };
-                            setModules((prev) =>
-                              prev.map((m) =>
-                                m.id === module.id
-                                  ? { ...m, slides: m.slides.map((s, i) => (i === idx ? updatedSlide : s)) }
-                                  : m
-                              )
-                            );
-                          }}
-                          placeholder="Slide content..."
-                        />
+                        {/* Rich text editor for text slides */}
+                        {(() => {
+                          const idx = selectedSlideIdx[module.id] ?? 0;
+                          const slide = module.slides[idx];
+                          if (!slide || slide.type !== "text") return null;
+                          const dynamic = require("next/dynamic").default;
+                          const RichTextEditor = dynamic(() => import("./RichTextEditor"), { ssr: false });
+                          return (
+                            <RichTextEditor
+                              value={slide.html || ""}
+                              onChange={(html: string) => {
+                                const updatedSlide = { ...slide, html };
+                                setModules((prev) =>
+                                  prev.map((m) =>
+                                    m.id === module.id
+                                      ? { ...m, slides: m.slides.map((s, i) => (i === idx ? updatedSlide : s)) }
+                                      : m
+                                  )
+                                );
+                              }}
+                              placeholder="Slide content..."
+                            />
+                          );
+                        })()}
                       </div>
                     </div>
                     {/* Thumbnails */}
@@ -263,3 +322,5 @@ export default function ModuleEditorPage() {
     </main>
   );
 }
+
+export default ModuleEditorPage;
