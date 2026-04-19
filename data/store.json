@@ -1,93 +1,12 @@
 {
   "modules": [
     {
-      "id": "physics-turning-forces",
-      "title": "Turning Effect of Forces",
-      "topic": "Physics - Forces and Motion",
-      "assignedClasses": [
-        "10A",
-        "10B",
-        "10C"
-      ],
-      "theme": "minimalist",
-      "slides": [
-        {
-          "id": "intro-turning-effect",
-          "type": "text",
-          "html": "<img src=\"/uploads/4d66ac01-30cc-434d-9cc6-205b33873262.png\" alt=\"Inserted image\" class=\"mx-auto max-w-full rounded-2xl\"><iframe class=\"w-full aspect-video rounded-2xl\" src=\"https://www.youtube.com/embed/lSxqKW-2jWs\" title=\"YouTube video\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\"></iframe><h2>What is the Turning Effect of Forces?</h2><p>The turning effect of a force is also called the <strong>moment of force</strong> or <strong>torque</strong>. It depends on two factors:</p><ul><li>The magnitude of the force applied</li><li>The perpendicular distance from the pivot point to the line of action of the force</li></ul><p>This distance is called the <em>moment arm</em> or <em>lever arm</em>.</p><p><strong>Formula:</strong> Moment = Force × Perpendicular distance</p><p>Or mathematically: \\(M = F \\times d\\)</p><p>Where:<br>\\(\\ M\\) = moment (Nm)<br>\\(\\ F\\) = force (N)<br>\\(\\ d\\) = perpendicular distance (m)</p>"
-        },
-        {
-          "id": "quiz-moment-calculation",
-          "type": "quiz",
-          "quiz": {
-            "prompt": "A force of 20 N is applied at a distance of 0.5 m from a pivot. What is the moment of force?",
-            "choices": [
-              "10 Nm",
-              "10 N",
-              "40 Nm",
-              "40 N"
-            ],
-            "responses": {}
-          }
-        },
-        {
-          "id": "principle-moments",
-          "type": "text",
-          "html": "<h2>Principle of Moments</h2><p>For a body to be in equilibrium (not rotating), the sum of clockwise moments must equal the sum of anticlockwise moments.</p><p><strong>Clockwise Moment = Anticlockwise Moment</strong></p><p>This principle is used in:</p><ul><li>Seesaws</li><li>Balance scales</li><li>Lever systems</li><li>Bridge construction</li></ul><p><strong>Example:</strong> A 50 N weight is placed 2 m from a pivot. To balance it, you need a 25 N weight placed 4 m from the pivot on the other side.</p><p>Why? Because \\(50 \\times 2 = 25 \\times 4 = 100\\) Nm</p>"
-        },
-        {
-          "id": "quiz-principle-application",
-          "type": "quiz",
-          "quiz": {
-            "prompt": "A seesaw has a child weighing 300 N sitting 1.5 m from the pivot. Where should a child weighing 200 N sit to balance the seesaw?",
-            "choices": [
-              "1.5 m from pivot",
-              "2.25 m from pivot",
-              "1.0 m from pivot",
-              "3.0 m from pivot"
-            ],
-            "responses": {}
-          }
-        },
-        {
-          "id": "levers-types",
-          "type": "text",
-          "html": "<h2>Types of Levers</h2><p>There are three types of levers, classified by the position of the effort, load, and fulcrum:</p><h3>1. First Class Lever</h3><p>Fulcrum is between effort and load</p><p><strong>Examples:</strong> Seesaw, crowbar, scissors</p><p><strong>Mechanical Advantage:</strong> Can be greater or less than 1</p><h3>2. Second Class Lever</h3><p>Load is between effort and fulcrum</p><p><strong>Examples:</strong> Wheelbarrow, nutcracker, bottle opener</p><p><strong>Mechanical Advantage:</strong> Always greater than 1</p><h3>3. Third Class Lever</h3><p>Effort is between load and fulcrum</p><p><strong>Examples:</strong> Fishing rod, human arm, tweezers</p><p><strong>Mechanical Advantage:</strong> Always less than 1</p>"
-        },
-        {
-          "id": "quiz-lever-types",
-          "type": "quiz",
-          "quiz": {
-            "prompt": "Which of these is a second class lever?",
-            "choices": [
-              "Seesaw",
-              "Wheelbarrow",
-              "Fishing rod",
-              "Scissors"
-            ],
-            "responses": {}
-          }
-        },
-        {
-          "id": "centre-gravity",
-          "type": "text",
-          "html": "<h2>Centre of Gravity</h2><p>The centre of gravity is the point where the entire weight of the body acts. For stability:</p><ul><li>The lower the centre of gravity, the more stable the object</li><li>The centre of gravity should be above the base of support</li></ul><p><strong>Examples of stability:</strong></p><ul><li>A wide-based object is more stable than a narrow-based one</li><li>A car rolls over when its centre of gravity falls outside its base</li></ul><p><strong>Calculating Centre of Gravity:</strong></p><p>For multiple point masses: \\(x_{cg} = \\frac{m_1x_1 + m_2x_2 + ...}{m_1 + m_2 + ...}\\)</p><p>Where \\(x_{cg}\\) is the position of the centre of gravity.</p>"
-        },
-        {
-          "id": "quiz-stability",
-          "type": "quiz",
-          "quiz": {
-            "prompt": "Why is a cone more stable than a cylinder of the same height and mass?",
-            "choices": [
-              "It has a lower centre of gravity",
-              "It has a wider base",
-              "It has more mass",
-              "It has a higher centre of gravity"
-            ],
-            "responses": {}
-          }
-        }
-      ]
+      "id": "module-1776597511118-2717",
+      "title": "Untitled Module",
+      "topic": "",
+      "assignedClasses": [],
+      "slides": [],
+      "theme": "default"
     }
   ],
   "students": [

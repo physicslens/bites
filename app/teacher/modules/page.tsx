@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+
 import { BlockMath, InlineMath } from "react-katex";
+import { saveModules } from "../../../lib/data";
 
 type QuizBlock = {
   prompt: string;
@@ -42,11 +44,49 @@ export default function ModuleEditorPage() {
   const [activeSlideForModal, setActiveSlideForModal] = useState<any>(null);
 
   // --- STUBS FOR ALL REFERENCED FUNCTIONS ---
-  function addModule() {}
-  function saveChanges() {}
-  function updateModule(module: Module) {}
+  function addModule() {
+    const newModule: Module = {
+      id: Math.random().toString(36).slice(2),
+      title: "Untitled Module",
+      topic: "",
+      assignedClasses: [],
+      slides: [],
+      theme: "default",
+    };
+    setModules((prev) => [...prev, newModule]);
+  }
+  async function saveChanges() {
+    setSaving(true);
+    setMessage(null);
+    try {
+      await saveModules(modules);
+      setMessage("Modules saved successfully.");
+    } catch (err) {
+      setMessage("Failed to save modules.");
+    } finally {
+      setSaving(false);
+    }
+  }
+  function updateModule(updated: Module) {
+    setModules((prev) => prev.map((m) => (m.id === updated.id ? updated : m)));
+  }
   function removeModule(id: string) {}
-  function createSlide(moduleId: string, type: "text" | "quiz") {}
+  function createSlide(moduleId: string, type: "text" | "quiz") {
+    setModules((prev) =>
+      prev.map((m) => {
+        if (m.id !== moduleId) return m;
+        const newSlide =
+          type === "text"
+            ? { id: Math.random().toString(36).slice(2), type: "text", html: "" }
+            : {
+                id: Math.random().toString(36).slice(2),
+                type: "quiz",
+                quiz: { prompt: "", choices: ["", "", "", ""], correct: undefined, responses: {} },
+              };
+        return { ...m, slides: [...m.slides, newSlide] };
+      })
+    );
+  }
   function removeSlide(moduleId: string, slideId: string) {}
   function applyTextCommand(moduleId: string, slideId: string, cmd: string) {}
   function syncTextHtml(moduleId: string, slideId: string) {}
@@ -171,7 +211,19 @@ export default function ModuleEditorPage() {
                             if (slide.type === "text") return slide.html || "";
                             return "[Quiz slide]";
                           })()}
-                          onChange={() => {}}
+                          onChange={(e) => {
+                            const idx = selectedSlideIdx[module.id] ?? 0;
+                            const slide = module.slides[idx];
+                            if (!slide || slide.type !== "text") return;
+                            const updatedSlide = { ...slide, html: e.target.value };
+                            setModules((prev) =>
+                              prev.map((m) =>
+                                m.id === module.id
+                                  ? { ...m, slides: m.slides.map((s, i) => (i === idx ? updatedSlide : s)) }
+                                  : m
+                              )
+                            );
+                          }}
                           placeholder="Slide content..."
                         />
                       </div>
