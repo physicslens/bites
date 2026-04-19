@@ -1,0 +1,186 @@
+{
+  "modules": [
+    {
+      "id": "physics-turning-forces",
+      "title": "Turning Effect of Forces",
+      "topic": "Physics - Forces and Motion",
+      "assignedClasses": [
+        "10A",
+        "10B",
+        "10C"
+      ],
+      "slides": [
+        {
+          "id": "intro-turning-effect",
+          "type": "text",
+          "html": "<h2>What is the Turning Effect of Forces?</h2><p>The turning effect of a force is also called the <strong>moment of force</strong> or <strong>torque</strong>. It depends on two factors:</p><ul><li>The magnitude of the force applied</li><li>The perpendicular distance from the pivot point to the line of action of the force</li></ul><p>This distance is called the <em>moment arm</em> or <em>lever arm</em>.</p><p><strong>Formula:</strong> Moment = Force × Perpendicular distance</p><p>Or mathematically: \\(M = F \\times d\\)</p><p>Where:<br>\\(\\ M\\) = moment (Nm)<br>\\(\\ F\\) = force (N)<br>\\(\\ d\\) = perpendicular distance (m)</p>"
+        },
+        {
+          "id": "quiz-moment-calculation",
+          "type": "quiz",
+          "quiz": {
+            "prompt": "A force of 20 N is applied at a distance of 0.5 m from a pivot. What is the moment of force?",
+            "choices": [
+              "10 Nm",
+              "10 N",
+              "40 Nm",
+              "40 N"
+            ],
+            "responses": {}
+          }
+        },
+        {
+          "id": "principle-moments",
+          "type": "text",
+          "html": "<h2>Principle of Moments</h2><p>For a body to be in equilibrium (not rotating), the sum of clockwise moments must equal the sum of anticlockwise moments.</p><p><strong>Clockwise Moment = Anticlockwise Moment</strong></p><p>This principle is used in:</p><ul><li>Seesaws</li><li>Balance scales</li><li>Lever systems</li><li>Bridge construction</li></ul><p><strong>Example:</strong> A 50 N weight is placed 2 m from a pivot. To balance it, you need a 25 N weight placed 4 m from the pivot on the other side.</p><p>Why? Because \\(50 \\times 2 = 25 \\times 4 = 100\\) Nm</p>"
+        },
+        {
+          "id": "quiz-principle-application",
+          "type": "quiz",
+          "quiz": {
+            "prompt": "A seesaw has a child weighing 300 N sitting 1.5 m from the pivot. Where should a child weighing 200 N sit to balance the seesaw?",
+            "choices": [
+              "1.5 m from pivot",
+              "2.25 m from pivot",
+              "1.0 m from pivot",
+              "3.0 m from pivot"
+            ],
+            "responses": {}
+          }
+        },
+        {
+          "id": "levers-types",
+          "type": "text",
+          "html": "<h2>Types of Levers</h2><p>There are three types of levers, classified by the position of the effort, load, and fulcrum:</p><h3>1. First Class Lever</h3><p>Fulcrum is between effort and load</p><p><strong>Examples:</strong> Seesaw, crowbar, scissors</p><p><strong>Mechanical Advantage:</strong> Can be greater or less than 1</p><h3>2. Second Class Lever</h3><p>Load is between effort and fulcrum</p><p><strong>Examples:</strong> Wheelbarrow, nutcracker, bottle opener</p><p><strong>Mechanical Advantage:</strong> Always greater than 1</p><h3>3. Third Class Lever</h3><p>Effort is between load and fulcrum</p><p><strong>Examples:</strong> Fishing rod, human arm, tweezers</p><p><strong>Mechanical Advantage:</strong> Always less than 1</p>"
+        },
+        {
+          "id": "quiz-lever-types",
+          "type": "quiz",
+          "quiz": {
+            "prompt": "Which of these is a second class lever?",
+            "choices": [
+              "Seesaw",
+              "Wheelbarrow",
+              "Fishing rod",
+              "Scissors"
+            ],
+            "responses": {}
+          }
+        },
+        {
+          "id": "centre-gravity",
+          "type": "text",
+          "html": "<h2>Centre of Gravity</h2><p>The centre of gravity is the point where the entire weight of the body acts. For stability:</p><ul><li>The lower the centre of gravity, the more stable the object</li><li>The centre of gravity should be above the base of support</li></ul><p><strong>Examples of stability:</strong></p><ul><li>A wide-based object is more stable than a narrow-based one</li><li>A car rolls over when its centre of gravity falls outside its base</li></ul><p><strong>Calculating Centre of Gravity:</strong></p><p>For multiple point masses: \\(x_{cg} = \\frac{m_1x_1 + m_2x_2 + ...}{m_1 + m_2 + ...}\\)</p><p>Where \\(x_{cg}\\) is the position of the centre of gravity.</p>"
+        },
+        {
+          "id": "quiz-stability",
+          "type": "quiz",
+          "quiz": {
+            "prompt": "Why is a cone more stable than a cylinder of the same height and mass?",
+            "choices": [
+              "It has a lower centre of gravity",
+              "It has a wider base",
+              "It has more mass",
+              "It has a higher centre of gravity"
+            ],
+            "responses": {}
+          }
+        }
+      ]
+    }
+  ],
+  "students": [
+    {
+      "email": "alice@example.com",
+      "name": "Alice Johnson",
+      "className": "10A",
+      "assignedModules": [
+        "physics-turning-forces"
+      ],
+      "quizProgress": {}
+    },
+    {
+      "email": "bob@example.com",
+      "name": "Bob Smith",
+      "className": "10B",
+      "assignedModules": [
+        "physics-turning-forces"
+      ],
+      "quizProgress": {}
+    },
+    {
+      "email": "charlie@example.com",
+      "name": "Charlie Brown",
+      "className": "10C",
+      "assignedModules": [
+        "physics-turning-forces"
+      ],
+      "quizProgress": {}
+    }
+  ]
+}
+        "9B"
+      ],
+      "slides": [
+        {
+          "id": "slide-1",
+          "content": [
+            {
+              "id": "block-1",
+              "type": "text",
+              "text": "Gravity keeps planets in orbit and lets us stay grounded on Earth.",
+              "html": "Gravity keeps planets in orbit and lets us stay grounded on Earth."
+            },
+            {
+              "id": "block-2",
+              "type": "embed",
+              "url": "https://www.youtube.com/embed/KSYFv6q5i1k",
+              "title": "Gravity explainer"
+            }
+          ],
+          "quiz": {
+            "prompt": "Which of these is the acceleration due to gravity on Earth?",
+            "choices": [
+              "9.8 m/s^2",
+              "3.7 m/s^2",
+              "1.6 m/s^2",
+              "12 m/s^2"
+            ],
+            "correct": 0,
+            "responses": {
+              "9.8 m/s^2": 0,
+              "3.7 m/s^2": 0,
+              "1.6 m/s^2": 0,
+              "12 m/s^2": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "students": [
+    {
+      "email": "alice@example.com",
+      "name": "Alice Patel",
+      "className": "9A",
+      "assignedModules": [
+        "module-1"
+      ],
+      "quizProgress": {
+        "module-1": {
+          "slide-1": 9
+        }
+      }
+    },
+    {
+      "email": "ben@example.com",
+      "name": "Ben Smith",
+      "className": "9B",
+      "assignedModules": [
+        "module-1",
+        "module-2"
+      ],
+      "quizProgress": {}
+    }
+  ]
+}
